@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>关机就安全了吗 | Trace Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="背景在漏洞频发的今天，怎么才能保持自己的电脑的安全呢？关机或许是个不错的选择。可是关机就真的安全了吗？黑客能否远程开启你的计算机搞你呢？本文介绍两个关机也能搞的漏洞。 技术细节CVE-2017-5689Intel AMT技术Intel AMT其全称为INTEL Active Management Technology(英特尔主动管理技术)，它实质上是一种集成在芯片组中的嵌入式系统，不依赖特定的操作">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关机就安全了吗">
+<meta property="og:url" content="http://yoursite.com/2018/06/28/关机就安全了吗/index.html">
+<meta property="og:site_name" content="Trace Blog">
+<meta property="og:description" content="背景在漏洞频发的今天，怎么才能保持自己的电脑的安全呢？关机或许是个不错的选择。可是关机就真的安全了吗？黑客能否远程开启你的计算机搞你呢？本文介绍两个关机也能搞的漏洞。 技术细节CVE-2017-5689Intel AMT技术Intel AMT其全称为INTEL Active Management Technology(英特尔主动管理技术)，它实质上是一种集成在芯片组中的嵌入式系统，不依赖特定的操作">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2018/06/28/关机就安全了吗/login.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/06/28/关机就安全了吗/remotedesktop.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/06/28/关机就安全了吗/iLo-remotedesktop.PNG">
+<meta property="og:updated_time" content="2018-06-28T08:11:48.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关机就安全了吗">
+<meta name="twitter:description" content="背景在漏洞频发的今天，怎么才能保持自己的电脑的安全呢？关机或许是个不错的选择。可是关机就真的安全了吗？黑客能否远程开启你的计算机搞你呢？本文介绍两个关机也能搞的漏洞。 技术细节CVE-2017-5689Intel AMT技术Intel AMT其全称为INTEL Active Management Technology(英特尔主动管理技术)，它实质上是一种集成在芯片组中的嵌入式系统，不依赖特定的操作">
+<meta name="twitter:image" content="http://yoursite.com/2018/06/28/关机就安全了吗/login.PNG">
+  
+    <link rel="alternate" href="/atom.xml" title="Trace Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Trace Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-关机就安全了吗" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/06/28/关机就安全了吗/" class="article-date">
+  <time datetime="2018-06-28T08:07:36.000Z" itemprop="datePublished">2018-06-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      关机就安全了吗
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>在漏洞频发的今天，怎么才能保持自己的电脑的安全呢？关机或许是个不错的选择。可是关机就真的安全了吗？黑客能否远程开启你的计算机搞你呢？本文介绍两个关机也能搞的漏洞。</p>
+<h2 id="技术细节"><a href="#技术细节" class="headerlink" title="技术细节"></a>技术细节</h2><h3 id="CVE-2017-5689"><a href="#CVE-2017-5689" class="headerlink" title="CVE-2017-5689"></a>CVE-2017-5689</h3><h4 id="Intel-AMT技术"><a href="#Intel-AMT技术" class="headerlink" title="Intel AMT技术"></a>Intel AMT技术</h4><p>Intel AMT其全称为INTEL Active Management Technology(英特尔主动管理技术)，它实质上是一种集成在芯片组中的嵌入式系统，不依赖特定的操作系统，这也是IAMT与远程控制软件最大的不同。该技术会对外开放16992和16993端口，以便管理员远程维护。<img src="/2018/06/28/关机就安全了吗/login.PNG" alt=""></p>
+<h3 id="漏洞细节"><a href="#漏洞细节" class="headerlink" title="漏洞细节"></a>漏洞细节</h3><p>影响版本:<br>太多型号详见：<br><a href="https://www.securityfocus.com/bid/98269" target="_blank" rel="noopener">https://www.securityfocus.com/bid/98269</a></p>
+<p>AMT 登录管理中通过response_length值来进行判断，也即关键代码：</p>
+<pre><code class="C"><span class="keyword">if</span>(<span class="built_in">strncmp</span>(computed_response, user_response, response_length)) 
+deny_access();
+</code></pre>
+<p>这个标准函数仅仅比较两个字符串中每一个的response_length字节，看看它们是不是一样，加以比较的两个字符串是试图登录所发送的验证响应(user_response)和服务要求的响应(computed_response)。如果两者相符，密码肯定对的，所以该函数返回零，代码继续授予访问权。如果两个字符串不一样，该函数返回值是非零，这意味着密码不对，所以拒绝访问。所以如果提供的是空字符串，长度为零，没有字节被检查，因而没有字节是不一样的;不出所料，strncmp()返回零，表明验证成功。因而，空的响应字符串被认为有效而被放行，实际上明明是无效的，因此通过修改response的所有值为空，即可绕过验证进行登录。<a href="https://embedi.com/wp-content/uploads/dlm_uploads/2017/11/silent-bob-is-silent.pdf。" target="_blank" rel="noopener">https://embedi.com/wp-content/uploads/dlm_uploads/2017/11/silent-bob-is-silent.pdf。</a></p>
+<h3 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h3><p>使用burpcuit，单击“Proxy”-“Option”，在“Match and Replace”中新建或者编辑Request Header条目，Match值为response\s*=”[0-9a-f]+”，Replace 的值为response=””，在拦截(Intercept)中设置拦截开关为“Intercept is On”。用户名输入admin，密码随便输入。即可绕过登陆，绕过登陆后，可以直接添加管理员账号，开关机，远程挂载CD等。但是肯定有人会好奇那我怎么去看它桌面呢？像使用远控一样。强大的Intel给我们提供了AMT管理工具包，使用vnc既可以远程控制。下载地址:<a href="http://info.meshcentral.com/downloads/mdtk/meshcommander.msi" target="_blank" rel="noopener">http://info.meshcentral.com/downloads/mdtk/meshcommander.msi</a><br><img src="/2018/06/28/关机就安全了吗/remotedesktop.PNG" alt=""></p>
+<h3 id="CVE-2017-12542"><a href="#CVE-2017-12542" class="headerlink" title="CVE-2017-12542"></a>CVE-2017-12542</h3><h4 id="HP-iLo技术"><a href="#HP-iLo技术" class="headerlink" title="HP iLo技术"></a>HP iLo技术</h4><p>iLo是Integrated lights-out的简称，是HP服务器上集成的远程管理端口，只要将服务器接入网络并且没有断开服务器的电源，不管HP服务器处于何种状态（开机关机重启），都可以允许用户通过网络进行远程管理。简单的说，iLo是高级别的远程KVM系统，可以将服务器的信息显示在本地，并且使用本地的键盘鼠标控制操作服务器，并可以将本地的光盘镜像，文件夹作为虚拟光驱映射并加载到服务器中。使用iLo,可以完成底层的BIOS的设置磁盘的RAID和一系列的操作系统的底层工作。</p>
+<h3 id="漏洞细节-1"><a href="#漏洞细节-1" class="headerlink" title="漏洞细节"></a>漏洞细节</h3><p>影响版本:<br>HP Integrated Lights-Out 4 firmware 2.50<br>HP Integrated Lights-Out 4 firmware 2.44<br>HP Integrated Lights-Out 4 firmware 2.22<br>HP Integrated Lights-Out 4 firmware 2.20<br>HP Integrated Lights-Out 4 firmware 2.03<br>HP Integrated Lights-Out 4 firmware 1.32<br>HP Integrated Lights-Out 4 firmware 1.30<br>HP Integrated Lights-Out 4 firmware 1.22<br>HP Integrated Lights-Out 4 firmware 1.13<br>HP Integrated Lights-Out 4 firmware 1.11<br>HP Integrated Lights-Out 4 firmware 2.10<br><a href="https://airbus-seclab.github.io/ilo/SSTIC2018-Slides-EN-Backdooring_your_server_through_its_BMC_the_HPE_iLO4_case-perigaud-gazet-czarny.pdf" target="_blank" rel="noopener">https://airbus-seclab.github.io/ilo/SSTIC2018-Slides-EN-Backdooring_your_server_through_its_BMC_the_HPE_iLO4_case-perigaud-gazet-czarny.pdf</a></p>
+<h3 id="漏洞利用-1"><a href="#漏洞利用-1" class="headerlink" title="漏洞利用"></a>漏洞利用</h3><p>利用比较简单，绕过验证，添加用户。然后使用HP提供的管理工具连上去管理就可以了。<br>exploit:<a href="https://www.exploit-db.com/exploits/44005/" target="_blank" rel="noopener">https://www.exploit-db.com/exploits/44005/</a><br>管理工具下载:<a href="https://support.hpe.com/hpsc/swd/public/detail?swItemId=MTX_4f842ceb31cf48d392e22705a8" target="_blank" rel="noopener">https://support.hpe.com/hpsc/swd/public/detail?swItemId=MTX_4f842ceb31cf48d392e22705a8</a><br><img src="/2018/06/28/关机就安全了吗/iLo-remotedesktop.PNG" alt=""></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/06/28/关机就安全了吗/" data-id="cjiy9rn3q0001dzyliys4afbt" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/05/15/穿透Windows防火墙唤醒后门/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">穿透Windows防火墙唤醒后门</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/">Windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/加密/">加密</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后门/">后门</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Windows/" style="font-size: 20px;">Windows</a> <a href="/tags/加密/" style="font-size: 10px;">加密</a> <a href="/tags/后门/" style="font-size: 10px;">后门</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/06/28/关机就安全了吗/">关机就安全了吗</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/15/穿透Windows防火墙唤醒后门/">穿透Windows防火墙唤醒后门</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/26/Windows密码窃取/">Windows密码窃取</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/26/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Trace<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

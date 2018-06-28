@@ -62,6 +62,54 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-关机就安全了吗" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/06/28/关机就安全了吗/" class="article-date">
+  <time datetime="2018-06-28T08:07:36.000Z" itemprop="datePublished">2018-06-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/28/关机就安全了吗/">关机就安全了吗</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>在漏洞频发的今天，怎么才能保持自己的电脑的安全呢？关机或许是个不错的选择。可是关机就真的安全了吗？黑客能否远程开启你的计算机搞你呢？本文介绍两个关机也能搞的漏洞。</p>
+<h2 id="技术细节"><a href="#技术细节" class="headerlink" title="技术细节"></a>技术细节</h2><h3 id="CVE-2017-5689"><a href="#CVE-2017-5689" class="headerlink" title="CVE-2017-5689"></a>CVE-2017-5689</h3><h4 id="Intel-AMT技术"><a href="#Intel-AMT技术" class="headerlink" title="Intel AMT技术"></a>Intel AMT技术</h4><p>Intel AMT其全称为INTEL Active Management Technology(英特尔主动管理技术)，它实质上是一种集成在芯片组中的嵌入式系统，不依赖特定的操作系统，这也是IAMT与远程控制软件最大的不同。该技术会对外开放16992和16993端口，以便管理员远程维护。<img src="/2018/06/28/关机就安全了吗/login.PNG" alt=""></p>
+<h3 id="漏洞细节"><a href="#漏洞细节" class="headerlink" title="漏洞细节"></a>漏洞细节</h3><p>影响版本:<br>太多型号详见：<br><a href="https://www.securityfocus.com/bid/98269" target="_blank" rel="noopener">https://www.securityfocus.com/bid/98269</a></p>
+<p>AMT 登录管理中通过response_length值来进行判断，也即关键代码：</p>
+<pre><code class="C"><span class="keyword">if</span>(<span class="built_in">strncmp</span>(computed_response, user_response, response_length)) 
+deny_access();
+</code></pre>
+<p>这个标准函数仅仅比较两个字符串中每一个的response_length字节，看看它们是不是一样，加以比较的两个字符串是试图登录所发送的验证响应(user_response)和服务要求的响应(computed_response)。如果两者相符，密码肯定对的，所以该函数返回零，代码继续授予访问权。如果两个字符串不一样，该函数返回值是非零，这意味着密码不对，所以拒绝访问。所以如果提供的是空字符串，长度为零，没有字节被检查，因而没有字节是不一样的;不出所料，strncmp()返回零，表明验证成功。因而，空的响应字符串被认为有效而被放行，实际上明明是无效的，因此通过修改response的所有值为空，即可绕过验证进行登录。<a href="https://embedi.com/wp-content/uploads/dlm_uploads/2017/11/silent-bob-is-silent.pdf。" target="_blank" rel="noopener">https://embedi.com/wp-content/uploads/dlm_uploads/2017/11/silent-bob-is-silent.pdf。</a></p>
+<h3 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h3><p>使用burpcuit，单击“Proxy”-“Option”，在“Match and Replace”中新建或者编辑Request Header条目，Match值为response\s*=”[0-9a-f]+”，Replace 的值为response=””，在拦截(Intercept)中设置拦截开关为“Intercept is On”。用户名输入admin，密码随便输入。即可绕过登陆，绕过登陆后，可以直接添加管理员账号，开关机，远程挂载CD等。但是肯定有人会好奇那我怎么去看它桌面呢？像使用远控一样。强大的Intel给我们提供了AMT管理工具包，使用vnc既可以远程控制。下载地址:<a href="http://info.meshcentral.com/downloads/mdtk/meshcommander.msi" target="_blank" rel="noopener">http://info.meshcentral.com/downloads/mdtk/meshcommander.msi</a><br><img src="/2018/06/28/关机就安全了吗/remotedesktop.PNG" alt=""></p>
+<h3 id="CVE-2017-12542"><a href="#CVE-2017-12542" class="headerlink" title="CVE-2017-12542"></a>CVE-2017-12542</h3><h4 id="HP-iLo技术"><a href="#HP-iLo技术" class="headerlink" title="HP iLo技术"></a>HP iLo技术</h4><p>iLo是Integrated lights-out的简称，是HP服务器上集成的远程管理端口，只要将服务器接入网络并且没有断开服务器的电源，不管HP服务器处于何种状态（开机关机重启），都可以允许用户通过网络进行远程管理。简单的说，iLo是高级别的远程KVM系统，可以将服务器的信息显示在本地，并且使用本地的键盘鼠标控制操作服务器，并可以将本地的光盘镜像，文件夹作为虚拟光驱映射并加载到服务器中。使用iLo,可以完成底层的BIOS的设置磁盘的RAID和一系列的操作系统的底层工作。</p>
+<h3 id="漏洞细节-1"><a href="#漏洞细节-1" class="headerlink" title="漏洞细节"></a>漏洞细节</h3><p>影响版本:<br>HP Integrated Lights-Out 4 firmware 2.50<br>HP Integrated Lights-Out 4 firmware 2.44<br>HP Integrated Lights-Out 4 firmware 2.22<br>HP Integrated Lights-Out 4 firmware 2.20<br>HP Integrated Lights-Out 4 firmware 2.03<br>HP Integrated Lights-Out 4 firmware 1.32<br>HP Integrated Lights-Out 4 firmware 1.30<br>HP Integrated Lights-Out 4 firmware 1.22<br>HP Integrated Lights-Out 4 firmware 1.13<br>HP Integrated Lights-Out 4 firmware 1.11<br>HP Integrated Lights-Out 4 firmware 2.10<br><a href="https://airbus-seclab.github.io/ilo/SSTIC2018-Slides-EN-Backdooring_your_server_through_its_BMC_the_HPE_iLO4_case-perigaud-gazet-czarny.pdf" target="_blank" rel="noopener">https://airbus-seclab.github.io/ilo/SSTIC2018-Slides-EN-Backdooring_your_server_through_its_BMC_the_HPE_iLO4_case-perigaud-gazet-czarny.pdf</a></p>
+<h3 id="漏洞利用-1"><a href="#漏洞利用-1" class="headerlink" title="漏洞利用"></a>漏洞利用</h3><p>利用比较简单，绕过验证，添加用户。然后使用HP提供的管理工具连上去管理就可以了。<br>exploit:<a href="https://www.exploit-db.com/exploits/44005/" target="_blank" rel="noopener">https://www.exploit-db.com/exploits/44005/</a><br>管理工具下载:<a href="https://support.hpe.com/hpsc/swd/public/detail?swItemId=MTX_4f842ceb31cf48d392e22705a8" target="_blank" rel="noopener">https://support.hpe.com/hpsc/swd/public/detail?swItemId=MTX_4f842ceb31cf48d392e22705a8</a><br><img src="/2018/06/28/关机就安全了吗/iLo-remotedesktop.PNG" alt=""></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/06/28/关机就安全了吗/" data-id="cjiy9rn3q0001dzyliys4afbt" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-穿透Windows防火墙唤醒后门" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/05/15/穿透Windows防火墙唤醒后门/" class="article-date">
@@ -96,7 +144,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/15/穿透Windows防火墙唤醒后门/" data-id="cjh7na8b500016ayldsr05epf" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/15/穿透Windows防火墙唤醒后门/" data-id="cjiy9rn3w0004dzyli0mnaz7l" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Windows/">Windows</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/后门/">后门</a></li></ul>
@@ -142,7 +190,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/26/Windows密码窃取/" data-id="cjh7na8b800026ayl0eguuf4a" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/26/Windows密码窃取/" data-id="cjiy9rn3m0000dzyld4eytg3l" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Windows/">Windows</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/加密/">加密</a></li></ul>
@@ -189,7 +237,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/26/hello-world/" data-id="cjh7na8b100006aylnqr5ddep" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/26/hello-world/" data-id="cjiy9rn3v0003dzyl69w8wq11" class="article-share-link">Share</a>
       
       
     </footer>
@@ -231,7 +279,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li></ul>
     </div>
   </div>
 
@@ -242,6 +290,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/06/28/关机就安全了吗/">关机就安全了吗</a>
+          </li>
         
           <li>
             <a href="/2018/05/15/穿透Windows防火墙唤醒后门/">穿透Windows防火墙唤醒后门</a>
